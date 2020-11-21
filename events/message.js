@@ -29,9 +29,7 @@ module.exports = async(bot, msg) => {
 
         if(!cmdFile) return;
 
-        let userDB = await bot.data.getUserDB(msg.author.id);
         let data = {};
-        data.user = userDB;
         data.guild = guildDB;
         data.cmdFile = cmdFile;
 

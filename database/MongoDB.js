@@ -1,20 +1,10 @@
 const Discord = require('discord.js');
-const usersDB = require('./Schematics/User.js');
 const guildsDB = require('./Schematics/Guild.js');
 const membersDB = require('./Schematics/Member.js');
+const applicationsDB = require('./Schematics/Application.js');
+const questionsDB = require('./Schematics/Question.js');
 
-module.exports.getUserDB = async function(userID) {
-    let userDB = await usersDB.findOne({ id: userID });
-    if(userDB) {
-        return userDB;
-    } else {
-        userDB = new usersDB({ id: userID });
-        await userDB.save().catch(err => bot.logger.error('MongoDB user DB error - ' + err));
-        return userDB;
-    }
-}
-
-module.exports.getGuildDB = async function (guildID) {
+module.exports.getGuildDB = async function(guildID) {
     let guildDB = await guildsDB.findOne({ id: guildID });
     if(guildDB) {
         return guildDB;
@@ -25,7 +15,7 @@ module.exports.getGuildDB = async function (guildID) {
     }
 }
 
-module.exports.getMemberDB = async function (userID, guildID) {
+module.exports.getMemberDB = async function(userID, guildID) {
     let memberDB = await membersDB.findOne({ id: userID, guildID: guildID });
     if(memberDB) {
         return memberDB;
@@ -35,3 +25,7 @@ module.exports.getMemberDB = async function (userID, guildID) {
         return memberDB;
     }
 }
+
+module.exports.getGuildSchema = () => guildsDB;
+module.exports.getApplicationSchema = () => applicationsDB;
+module.exports.getQuestionSchema = () => questionsDB;

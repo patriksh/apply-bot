@@ -16,11 +16,11 @@ module.exports.getGuildDB = async function(guildID) {
 }
 
 module.exports.getMemberDB = async function(userID, guildID) {
-    let memberDB = await membersDB.findOne({ id: userID, guildID: guildID });
+    let memberDB = await membersDB.findOne({ id: userID, guild: guildID });
     if(memberDB) {
         return memberDB;
     } else {
-        memberDB = new membersDB({ id: userID, guildID: guildID });
+        memberDB = new membersDB({ id: userID, guild: guildID });
         await memberDB.save().catch(err => bot.logger.error('MongoDB member DB error - ' + err));
         return memberDB;
     }

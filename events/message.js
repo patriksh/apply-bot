@@ -29,8 +29,10 @@ module.exports = async(bot, msg) => {
 
         if(!cmdFile) return;
 
+        let memberDB = await bot.data.getMemberDB(msg.author.id, msg.guild.id);
         let data = {};
         data.guild = guildDB;
+        data.member = memberDB;
         data.cmdFile = cmdFile;
 
         if(!msg.channel.nsfw && cmdFile.nsfw)

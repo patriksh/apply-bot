@@ -16,9 +16,7 @@ module.exports.execute = async(bot, msg, args, data) => {
     let search = args.join(' ').trim().toLowerCase();
     let user = bot.tools.getUserMention(msg, search);
 
-    if(!user)
-        return bot.embeds.cmdError(msg, 'Specify a valid user by mentioning or writing the username.', module.exports);
-
+    if(!user) return bot.embeds.cmdError(msg, 'Specify a valid user by mentioning or writing the username.', module.exports);
 
     let memberDB = await bot.data.getMemberDB(user.id, msg.guild.id);
     memberDB.applyCount = 0;

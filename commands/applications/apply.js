@@ -138,6 +138,10 @@ module.exports.execute = async(bot, msg, args, data) => {
                 .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
                 .setTimestamp();
             answers.map(a => logEmbed.addField(a.question, a.answer, true));
+
+            let member = bot.data.getMemberDB(msg.author.id, msg.guild.id);
+            if(member.rejectCount) logEmbed.setFooter('Previously rejected ' + member.rejectCount + ' times');
+
             let channel = bot.tools.getLogChannel(msg.guild, data);
             await channel.send(logEmbed);
         }

@@ -15,12 +15,14 @@ module.exports = {
 module.exports.execute = async(bot, msg, args, data) => {
     let prefix = !data.guild.prefix ? bot.config.prefix : data.guild.prefix;
 
+    if(data.guild.clearChannel && msg.guild.me.permissions.has('MANAGE_MESSAGES')) msg.delete({ timeout: bot.config.clearTimeout });
+
     // Check if in apply channel.
     if(data.guild.appChannel !== null && data.guild.appChannel != msg.channel.id) {
         let embed = new Discord.MessageEmbed()
             .setColor(bot.config.color)
             .setDescription('Invalid channel. Apply in <#' + data.guild.appChannel + '>!');
-        return msg.channel.send(embed);
+        return msg.channel.send(embed).then(m => { if(data.guild.clearChannel) m.delete({ timeout: bot.config.clearTimeout })});
     }
 
     // Check if apply limit passed.
@@ -28,7 +30,7 @@ module.exports.execute = async(bot, msg, args, data) => {
         let embed = new Discord.MessageEmbed()
             .setColor(bot.config.color)
             .setDescription('You have passed the application limit of ' + data.guild.applyLimit + '!');
-        return msg.channel.send(embed);
+        return msg.channel.send(embed).then(m => { if(data.guild.clearChannel) m.delete({ timeout: bot.config.clearTimeout })});
     }
 
     // Prepare application, get questions.
@@ -67,7 +69,7 @@ module.exports.execute = async(bot, msg, args, data) => {
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
             .setTitle('Application')
             .setDescription('Answer the question in your direct messages.');
-        msg.channel.send(embed);
+        msg.channel.send(embed).then(m => { if(data.guild.clearChannel) m.delete({ timeout: bot.config.clearTimeout })});
 
         let answers = [];
         let qNumber = 1;
@@ -145,6 +147,6 @@ module.exports.execute = async(bot, msg, args, data) => {
             .setColor(bot.config.color)
             .setTitle('Application failed')
             .setDescription('It seems like I can\'t message you. Do you have direct messages disabled?');
-        msg.channel.send(embed);
+        msg.channel.send(embed).then(m => { if(data.guild.clearChannel) m.delete({ timeout: bot.config.clearTimeout })});
     });
 }

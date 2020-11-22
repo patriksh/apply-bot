@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: 'applylimit',
+    name: 'applimit',
     description: 'Set how many times an user can apply.',
-    usage: 'applylimit <number>',
-    aliases: [],
+    usage: 'applimit <number>',
+    aliases: ['applylimit'],
     permissions: ['ADMINISTRATOR'],
     botPermissions: [],
     nsfw: false,

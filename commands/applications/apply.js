@@ -71,7 +71,6 @@ module.exports.execute = async(bot, msg, args, data) => {
             .setDescription('Answer the question in your direct messages.');
         msg.channel.send(embed).then(m => { if(data.guild.clearChannel) m.delete({ timeout: bot.config.clearTimeout })});
 
-        let answers = [];
         let qNumber = 1;
         let cancel = false;
         for(q in questions) {
@@ -101,9 +100,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                     cancel = true;
                 // Save answer.
                 } else {
-                    let answerObj = { question: question.content, answer: answer };
-                    applicationDB.answers.create(answerObj);
-                    answers.push(answerObj);
+                    applicationDB.answers.push({ question: question.content, answer: answer });
                 }
             }).catch(err => {
                 bot.logger.error('Application timeout error - ' + err);
@@ -137,7 +134,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                 .setTitle('Application')
                 .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
                 .setTimestamp();
-            answers.map(a => logEmbed.addField(a.question, a.answer, true));
+            applicationDB.answers.map(a => logEmbed.addField(a.question, a.answer, true));
 
             let member = bot.data.getMemberDB(msg.author.id, msg.guild.id);
             if(member.rejectCount) logEmbed.setFooter('Previously rejected ' + member.rejectCount + ' times');

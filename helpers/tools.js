@@ -32,3 +32,18 @@ module.exports.getUserMention = function(msg, search) {
 
     return (user) ? user.user : false;
 }
+
+module.exports.getStatusString = function(status) {
+    switch(status) {
+        case 0:
+            return 'Not finished';
+        case 1:
+            return 'Pending review';
+        case 2:
+            return 'Accepted';
+        case 3:
+            return 'Rejected';
+        default:
+            return 'Unknown';
+    }
+}

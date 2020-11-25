@@ -35,9 +35,8 @@ module.exports.execute = async(bot, msg, args, data) => {
 
     // Prepare application, get questions.
     let applicationsDB = bot.data.getApplicationSchema();
-    let application = { user: msg.author.id, guild: msg.guild.id };
-    let applicationDB = new applicationsDB(application);
-    await applicationDB.save().catch(err => {
+    let application = new applicationsDB({ user: msg.author.id, guild: msg.guild.id });
+    await application.save().catch(err => {
         bot.logger.error('MongoDB server DB error - ' + err);
         return bot.embeds.dbError(msg);
     });
@@ -96,11 +95,11 @@ module.exports.execute = async(bot, msg, args, data) => {
                         .setDescription('Application cancelled.');
                     dmMsg.channel.send(embed);
 
-                    applicationsDB.deleteOne({ _id: applicationDB._id });
+                    applicationsDB.deleteOne({ _id: application._id });
                     cancel = true;
                 // Save answer.
                 } else {
-                    applicationDB.answers.push({ question: question.content, answer: answer });
+                    application.answers.push({ question: question.content, answer: answer });
                 }
             }).catch(err => {
                 bot.logger.error('Application timeout error - ' + err);
@@ -111,7 +110,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                     .setDescription('Application timed out.');
                 dmMsg.channel.send(embed);
 
-                applicationsDB.deleteOne({ _id: applicationDB._id });
+                applicationsDB.deleteOne({ _id: application._id });
                 cancel = true;
             });
         }
@@ -123,8 +122,8 @@ module.exports.execute = async(bot, msg, args, data) => {
                 .setDescription('Application finished');
             await dmMsg.channel.send(embed);
 
-            applicationDB.status = 1;
-            await applicationDB.save();
+            application.status = 1;
+            await application.save();
 
             data.member.applyCount += 1;
             await data.member.save();
@@ -134,7 +133,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                 .setTitle('Application')
                 .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
                 .setTimestamp();
-            applicationDB.answers.map(a => logEmbed.addField(a.question, a.answer, true));
+            application.answers.map(a => logEmbed.addField(a.question, a.answer, true));
 
             let member = bot.data.getMemberDB(msg.author.id, msg.guild.id);
             if(member.rejectCount) logEmbed.setFooter('Previously rejected ' + member.rejectCount + ' times');

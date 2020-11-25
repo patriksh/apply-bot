@@ -37,6 +37,7 @@ module.exports.execute = async(bot, msg, args, data) => {
         let embed = new Discord.MessageEmbed()
             .setColor(bot.config.color)
             .setAuthor(user.tag, user.displayAvatarURL())
+            .setFooter('Status: ' + bot.tools.getStatusString(application.status))
             .setTimestamp(application.date);
         application.answers.map(a => embed.addField(a.question, a.answer, true));
         return msg.channel.send(embed);

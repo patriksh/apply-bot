@@ -95,7 +95,8 @@ module.exports.execute = async(bot, msg, args, data) => {
                         .setDescription('Application cancelled.');
                     dmMsg.channel.send(embed);
 
-                    applicationsDB.deleteOne({ _id: application._id });
+                    applicationsDB.findByIdAndRemove(application._id, function(err, app) {});
+
                     cancel = true;
                 // Save answer.
                 } else {
@@ -110,7 +111,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                     .setDescription('Application timed out.');
                 dmMsg.channel.send(embed);
 
-                applicationsDB.deleteOne({ _id: application._id });
+                applicationsDB.findByIdAndRemove(application._id, function(err, app) {});
                 cancel = true;
             });
         }

@@ -13,7 +13,12 @@ module.exports = {
 }
 
 module.exports.execute = async(bot, msg, args, data) => {
-    // TODO: validate reviewer role
+    if(!bot.tools.isReviewer(msg, data)) {
+        let embed = new Discord.MessageEmbed()
+            .setColor(bot.config.color)
+            .setDescription('Only users with ' + bot.tools.reviewerName(msg, data) + ' are allowed to review applications.');
+        return msg.channel.send(embed);
+    }
 
     let search = args.join(' ').trim().toLowerCase();
     let user = bot.tools.getUserMention(msg, search);

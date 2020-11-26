@@ -33,6 +33,25 @@ module.exports.getUserMention = function(msg, search) {
     return (user) ? user.user : false;
 }
 
+module.exports.isReviewer = function(msg, data) {
+    let role = data.guild.reviewer;
+    if(role) {
+        return msg.member.roles.cache.find(r => r.id == role);
+    } else {
+        return msg.member.hasPermission('ADMINISTRATOR');
+    }
+}
+
+// dumb?
+module.exports.reviewerName = function(msg, data) {
+    let role = data.guild.reviewer;
+    if(role) {
+        return msg.guild.roles.cache.get(role).name + ' role';
+    } else {
+        return 'Administrator permissions';
+    }
+}
+
 module.exports.getStatusString = function(status) {
     switch(status) {
         case 0:

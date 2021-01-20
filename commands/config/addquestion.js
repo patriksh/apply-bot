@@ -4,7 +4,7 @@ module.exports = {
     name: 'addquestion',
     description: 'Add a question.',
     usage: 'addquestion <text>',
-    aliases: ['add'],
+    aliases: ['addq'],
     permissions: ['ADMINISTRATOR'],
     botPermissions: [],
     nsfw: false,

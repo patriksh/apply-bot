@@ -5,7 +5,7 @@ module.exports = {
     name: 'deletequestion',
     description: 'Delete a question.',
     usage: 'deletequestion <question>',
-    aliases: ['delete'],
+    aliases: ['delq'],
     permissions: ['ADMINISTRATOR'],
     botPermissions: [],
     nsfw: false,

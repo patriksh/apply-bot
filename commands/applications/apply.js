@@ -85,7 +85,7 @@ module.exports.execute = async(bot, msg, args, data) => {
             await dmMsg.channel.send(questionEmbed);
 
             // Process answer.
-            await dmMsg.channel.awaitMessages(m => m.content, { max: 1, time: 300000, errors: ['time'] }).then(async collected => {
+            await dmMsg.channel.awaitMessages(m => m.content, { max: 1, time: 1800000, errors: ['time'] }).then(async collected => {
                 let answer = collected.first().content.trim();
 
                 // Cancel application.

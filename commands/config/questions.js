@@ -17,7 +17,7 @@ module.exports.execute = async(bot, msg, args, data) => {
 
     let questionsDB = bot.data.getQuestionSchema();
     let questions = await questionsDB.find({ guild: msg.guild.id }).catch(err => {
-        bot.logger.error('MongoDB server DB error - ' + err);
+        bot.logger.error('DB error - ' + err);
         return bot.embeds.dbError(msg);
     });
 
@@ -26,7 +26,7 @@ module.exports.execute = async(bot, msg, args, data) => {
 
     if(!questions.length) {
         embed.setTitle('No questions');
-        embed.setFooter('Tip: use ' + prefix + 'add <text> to add a question.');
+        embed.setFooter('Tip: use ' + prefix + 'addq <text> to add a question.');
 
         return msg.channel.send(embed);
     }

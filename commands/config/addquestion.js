@@ -23,7 +23,7 @@ module.exports.execute = async(bot, msg, args, data) => {
     let question = { guild: msg.guild.id, content: content };
     let questionDB = new questionsDB(question);
     await questionDB.save().catch(err => {
-        bot.logger.error('MongoDB server DB error - ' + err);
+        bot.logger.error('DB error - ' + err);
         return bot.embeds.dbError(msg);
     });
 

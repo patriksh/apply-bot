@@ -20,14 +20,14 @@ module.exports.execute = async(bot, msg, args, data) => {
         return msg.channel.send(embed);
     }
 
-    let search = args[0].trim().toLowerCase();
+    let search = args.join(' ').trim().toLowerCase();
     let user = bot.tools.getUserMention(msg, search);
 
     if(!user) return bot.embeds.cmdError(msg, 'Specify a valid user by mentioning or writing the username.', module.exports);
 
     let applicationsDB = bot.data.getApplicationSchema();
     let applications = await applicationsDB.find({ user: user.id, guild: msg.guild.id, status: 1 }, null, { sort: { date: -1 } }).catch(err => {
-        bot.logger.error('MongoDB server DB error - ' + err);
+        bot.logger.error('DB error - ' + err);
         return bot.embeds.dbError(msg);
     });
 

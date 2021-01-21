@@ -1,4 +1,3 @@
-const Discord = require('discord.js');
 const guildsDB = require('./Schematics/Guild.js');
 const membersDB = require('./Schematics/Member.js');
 const applicationsDB = require('./Schematics/Application.js');
@@ -27,5 +26,6 @@ module.exports.getMemberDB = async function(userID, guildID) {
 }
 
 module.exports.getGuildSchema = () => guildsDB;
+module.exports.getMemberSchema = () => membersDB;
 module.exports.getApplicationSchema = () => applicationsDB;
 module.exports.getQuestionSchema = () => questionsDB;

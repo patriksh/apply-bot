@@ -22,7 +22,7 @@ module.exports.execute = async(bot, msg, args, data) => {
 
     let questionsDB = bot.data.getQuestionSchema();
     let questions = await questionsDB.find({ content: { $regex: content, $options: 'i' }, guild: msg.guild.id }).limit(10).catch(err => {
-        bot.logger.error('MongoDB server DB error - ' + err);
+        bot.logger.error('DB error - ' + err);
         return bot.embeds.dbError(msg);
     });
 
@@ -60,7 +60,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                             .setDescription('Successfully deleted `' + question.content + '`.');
                         return m.edit(embed);
                     }).catch(err => {
-                        bot.logger.error('MongoDB server DB error - ' + err);
+                        bot.logger.error('DB error - ' + err);
                         return bot.embeds.dbError(msg);
                     });
                 } else {
@@ -78,7 +78,7 @@ module.exports.execute = async(bot, msg, args, data) => {
     } else {
         let question = questions[0];
         await questionsDB.deleteOne({ _id: question._id }).catch(err => {
-            bot.logger.error('MongoDB server DB error - ' + err);
+            bot.logger.error('DB error - ' + err);
             return bot.embeds.dbError(msg);
         });
 

@@ -27,7 +27,7 @@ module.exports.execute = async(bot, msg, args, data) => {
 
     let applicationsDB = bot.data.getApplicationSchema();
     let applications = await applicationsDB.find({ user: user.id, guild: msg.guild.id }, null, { sort: { date: -1 } }).catch(err => {
-        bot.logger.error('MongoDB server DB error - ' + err);
+        bot.logger.error('DB error - ' + err);
         return bot.embeds.dbError(msg);
     });
 

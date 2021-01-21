@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js-light');
 
 module.exports = {
     name: 'botstats',
@@ -19,10 +19,10 @@ module.exports.execute = async(bot, msg, args, data) => {
         .setFooter(bot.config.credits)
         .setColor(bot.config.color)
         .addFields(
-            { name: 'Guilds', value: bot.guilds.cache.size, inline: true},
+            { name: 'Guilds', value: bot.guilds.cache.size, inline: true },
             { name: 'Users', value: bot.users.cache.size, inline: true },
             { name: 'Latency', value: bot.ws.ping + 'ms', inline: true },
-            { name: 'Library', value: 'Discord.js V' + Discord.version }
+            { name: 'Library', value: 'Discord.js Light V' + Discord.version }
         );
 
     return msg.channel.send(embed);

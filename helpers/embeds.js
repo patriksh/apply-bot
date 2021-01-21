@@ -1,20 +1,10 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js-light');
 
 module.exports.mention = (msg, prefix, bot) => {
     let embed = new Discord.MessageEmbed()
         .setColor(bot.config.color)
         .setAuthor(bot.user.username, bot.user.displayAvatarURL())
         .setDescription('My prefix in this guild is `' + prefix + '`.\nUse `' + prefix + 'help` to view my commands.');
-
-    return msg.channel.send(embed);
-};
-
-module.exports.nsfw = (msg) => {
-    let embed = new Discord.MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Not a NSFW channel')
-        .setDescription('Use NSFW commands in a NSFW marked channel.')
-        .setImage('https://cdn.glitch.com/1b2eeab1-8ec3-4a67-bba8-b8e876d50140%2Foe4iK5i.gif');
 
     return msg.channel.send(embed);
 };
@@ -68,7 +58,7 @@ module.exports.dbError = (msg) => {
     let embed = new Discord.MessageEmbed()
         .setColor('#ff0000')
         .setTitle('Database error')
-        .setDescription('An error has happened while executing your command.\nPlease try again or report to our support: blah blah.');
+        .setDescription('An error has happened while executing your command.\nPlease try again.');
 
     return msg.channel.send(embed);
 };

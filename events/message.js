@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js-light');
 const embeds = require('../helpers/embeds.js');
 const cooldown = {};
 

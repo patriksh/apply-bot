@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js-light');
 
 module.exports.getLogChannel = function(guild, data) {
     let channel;

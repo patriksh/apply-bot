@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js-light');
 const Num2Emoji = require('number-to-emoji');
 
 module.exports = {

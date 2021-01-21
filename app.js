@@ -1,11 +1,19 @@
 /* includes */
-const Discord = require('discord.js');
+const Discord = require('discord.js-light');
 const fs = require('fs');
 const util = require('util');
 const mongoose = require('mongoose');
 
 /* defines & config */
-const bot = new Discord.Client();
+const bot = new Discord.Client({
+    cacheGuilds: true,
+    cacheChannels: true,
+    cacheOverwrites: false,
+    cacheRoles: true,
+    cacheEmojis: false,
+    cachePresences: false,
+    disabledEvents: ['messageDeleteBulk', 'channelCreate', 'channelUpdate', 'channelPinsUpdate', 'roleCreate', 'roleUpdate', 'inviteCreate', 'inviteDelete', 'guildBanAdd', 'guildBanRemove', 'guildMemberAdd', 'guildMemberUpdate', 'guildMemberRemove', 'guildIntegrationsUpdate', 'presenceUpdate', 'typingStart', 'userUpdate', 'voiceStateUpdate', 'webhookUpdate']
+});
 const readdir = util.promisify(fs.readdir);
 
 bot.events = new Discord.Collection();

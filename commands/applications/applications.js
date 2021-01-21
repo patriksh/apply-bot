@@ -44,7 +44,7 @@ module.exports.execute = async(bot, msg, args, data) => {
             .setAuthor(user.tag, user.displayAvatarURL())
             .setFooter('Status: ' + bot.tools.getStatusString(application.status))
             .setTimestamp(application.date);
-        application.answers.map(a => embed.addField(a.question, a.answer, true));
+        application.answers.map(a => embed.addField(a.question, a.answer.substring(0, 1024), true)); // temporary fix for long answers.
         return msg.channel.send(embed);
     });
 }

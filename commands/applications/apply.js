@@ -134,7 +134,7 @@ module.exports.execute = async(bot, msg, args, data) => {
                 .setTitle('Application')
                 .setAuthor(msg.author.tag, msg.author.displayAvatarURL())
                 .setTimestamp();
-            application.answers.map(a => logEmbed.addField(a.question, a.answer, true));
+            application.answers.map(a => logEmbed.addField(a.question, a.answer.substring(0, 1024), true)); // temporary fix for long answers.
 
             let member = bot.data.getMemberDB(msg.author.id, msg.guild.id);
             if(member.rejectCount) logEmbed.setFooter('Previously rejected ' + member.rejectCount + ' times');

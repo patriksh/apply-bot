@@ -3,7 +3,7 @@ const Discord = require('discord.js-light');
 module.exports = {
     name: 'accept',
     description: 'Accept an application.',
-    usage: 'accept <user> <reason>',
+    usage: 'accept <user> <note>',
     aliases: [],
     permissions: [],
     botPermissions: [],

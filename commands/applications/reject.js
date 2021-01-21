@@ -3,7 +3,7 @@ const Discord = require('discord.js-light');
 module.exports = {
     name: 'reject',
     description: 'Reject an application.',
-    usage: 'reject <user> <reason>',
+    usage: 'reject <user> <note>',
     aliases: [],
     permissions: [],
     botPermissions: [],

@@ -35,9 +35,6 @@ module.exports = async(bot, msg) => {
         data.member = memberDB;
         data.cmdFile = cmdFile;
 
-        if(!msg.channel.nsfw && cmdFile.nsfw)
-            return embeds.nsfw(msg);
-
         let isOwner = bot.config.owners.includes(msg.author.id);
         if(cmdFile.ownerOnly && !isOwner) return;
         if((cmdFile.permissions && !msg.member.permissions.has(cmdFile.permissions)) && !isOwner)

@@ -6,6 +6,7 @@
     "dependencies": {
         "bufferutil": "^4.0.3",
         "chalk": "^4.1.0",
+        "dblapi.js": "^2.4.1",
         "discord.js-light": "^3.5.0",
         "erlpack": "github:discord/erlpack",
         "moment": "^2.29.1",

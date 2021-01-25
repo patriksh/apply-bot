@@ -3,6 +3,7 @@ const Discord = require('discord.js-light');
 const fs = require('fs');
 const util = require('util');
 const mongoose = require('mongoose');
+const DBL = require('dblapi.js');
 
 /* defines & config */
 const bot = new Discord.Client({
@@ -23,6 +24,8 @@ bot.embeds = require('./helpers/embeds.js');
 bot.logger = require('./helpers/logger.js');
 bot.tools = require('./helpers/tools.js');
 bot.config = require('./config.json');
+
+const dbl = new DBL(bot.config.DBL, bot);
 
 async function initialize() {
     // load events

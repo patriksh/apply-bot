@@ -1,5 +1,6 @@
 {
     "token": "Your Token",
+    "DBL": "Your DBL token",
     "prefix": "!",
     "mongoDB": "mongodb://127.0.0.1:27017/DiscordBot",
     "color": "Embed Color (HEX)",

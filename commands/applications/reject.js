@@ -20,6 +20,8 @@ module.exports.execute = async(bot, msg, args, data) => {
         return msg.channel.send(embed);
     }
 
+    await msg.guild.members.fetch(); // monitor resource usage... find better solution?
+
     let search = args.join(' ').trim().toLowerCase();
     let user = bot.tools.getUserMention(msg, search);
 

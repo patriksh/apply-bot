@@ -1,5 +1,7 @@
 [![Discord Bots](https://top.gg/api/widget/status/753982465261174847.svg)](https://top.gg/bot/753982465261174847) [![Discord Bots](https://top.gg/api/widget/servers/753982465261174847.svg)](https://top.gg/bot/753982465261174847)
 
+* This bot is no longer officialy maintained...
+
 # ApplyBot
 Simple yet powerful application bot for your servers.
 
